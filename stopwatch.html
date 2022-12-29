@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>stopwatch</title>
+</head>
+<body>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-image: linear-gradient(to right,#9b34b0,#ffff);
+        }
+        .stopwatch{
+            font-size: 30px;
+
+        }
+        #result{
+            padding: 50px;
+            border: 5px solid #9b34b0;
+            border-radius: 50px;
+        }
+        span{
+            font-size: 40px;
+            padding: 15px;
+            border: 3px solid #9b34b0;
+            border-radius: 30px;
+        }
+        button{
+            padding: 15px;
+            margin-top: 40px;
+            font-size: 20px;
+            border-radius: 30px;
+            background-color: #9b34b0;
+            color:white;
+            cursor: pointer;
+
+        }
+        button:hover{
+            background-color:rgb(100, 58, 62);
+        }
+    </style>
+    <div class="container" >
+        <div class="stopwatch" font-size="30px">
+            <p> Stop Watch</p>
+            <div id="result">
+                <span id = "hour"> 00</span> :
+                <span id = "minute"> 00 </span> :
+                <span id = "second"> 00</span>
+                
+
+            </div>
+            <div class="btns">
+                <button onclick="call_btn.start()">start</button>
+                <button onclick="call_btn.reset()">reset</button>
+                <button onclick="call_btn.stop()">stop</button>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        var timer,hour,minute,second,stop,start,reset,m_sec;
+        var updsec=0,updminute=0,updhour=0;
+        var call_btn= new stopwatch();
+
+        
+        
+        function stopwatch(){
+            this.start=function(){
+                hour=document.getElementById('hour');
+                minute=document.getElementById('minute');
+                second=document.getElementById('second');
+                
+
+                if(updsec >= 0){
+                    updsec++;
+                    second.innerHTML=updsec;
+                }
+                if(updsec<10){
+                    second.innerHTML="0"+ updsec;
+                }
+                if(updsec>=60){
+                    updsec=0;
+                    updminute++;
+                    minute.innerHTML=updminute;
+                }
+                if(updminute<10){
+                    minute.innerHTML="0" + updminute;
+                }
+                if(updminute>=60){
+                    updminute=0;
+                    updhour++;
+                    hour.innerHTML=updhour;
+                }  
+                if(updhour<10){
+                    hour.innerHTML="0"+updhour;
+                }              
+
+                m_sec = setTimeout(call_btn.start,1000);
+                    
+                }
+                this.stop=function() {
+                    clearTimeout(m_sec);
+                }
+                this.reset=function(){
+                    if(updsec>=0){
+                        updsec=0;
+                        updminute=0;
+                        updhour=0;
+                        second.innerHTML="0"+updsec;
+                        minute.innerHTML="0"+updminute;
+                        hour.innerHTML="0"+updhour;
+                        clearTimeout(m_sec);
+
+                    }
+                }
+
+            }
+        
+
+       
+    </script>
+
+   
+    </body>
+</body>
+</html>
